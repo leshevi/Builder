@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👷Отделочник</title>
+    <title>{{ data.name }} - {{ data.profession }}</title>
+  </head>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .profession {
+            font-style: italic;
+        }
+        section {
+            margin: 30px 0;
+        }
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .service {
+            background: #f4f4f4;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .project {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .project img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+  <body>
+     <header>
+        <div class="container">
+            <h1>{{ data.name }}</h1>
+            <p class="profession">{{ data.profession }}</p>
+            <p>Опыт работы: {{ data.experience }}</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="about">
+            <h2>Обо мне</h2>
+            <p>Профессиональный строитель-отделочник с большим опытом работы. Выполняю работы качественно и в срок.</p>
+        </section>
+
+        <section id="services">
+            <h2>Услуги</h2>
+            <div class="services">
+                {% for service in data.services %}
+                <div class="service">{{ service }}</div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2>Мои работы</h2>
+            <div class="projects">
+                {% for project in data.projects %}
+                <div class="project">
+                    <h3>{{ project.title }}</h3>
+                    <img src="{{ url_for('static', filename='images/' + project.image) }}" alt="{{ project.title }}">
+                    <p>{{ project.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <h2>Контакты</h2>
+            <p>Телефон: {{ data.contacts.phone }}</p>
+            <p>Email: {{ data.contacts.email }}</p>
+            <p>Адрес: {{ data.contacts.address }}</p>
+        </div>
+    </footer>
+   </body>
+</html>
